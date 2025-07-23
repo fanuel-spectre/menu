@@ -282,10 +282,12 @@ mark {
 }
 
 .menu-item {
-  background-color: var(--card-bg);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: relative; /* Ensure fav-btn is positioned relative to the card */
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   transition: transform 0.2s ease;
 }
 
@@ -319,4 +321,38 @@ mark {
   background: #ffd43b;
   border-radius: 3px;
   padding: 0 3px;
+}
+
+.fav-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.fav-icon {
+  font-size: 1.5rem;
+  color: #e80909; /* default (not liked) */
+}
+
+.fav-icon.filled {
+  color: red; /* liked */
+}
+
+.image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* keeps the image square */
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.menu-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ensures image fills the box without distortion */
+  display: block;
 }

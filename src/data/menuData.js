@@ -1,3 +1,7 @@
+import lava from "../assets/lava.jpg";
+import pizza from "../assets/pizza.jpg";
+import salad from "../assets/salads.jpg";
+
 const menuData = [
   {
     id: 1,
@@ -5,7 +9,7 @@ const menuData = [
     category: "Main",
     price: "$8.99",
     description: "Classic pizza with tomato sauce and mozzarella",
-    image: "https://via.placeholder.com/150",
+    image: pizza,
   },
   {
     id: 2,
@@ -13,7 +17,7 @@ const menuData = [
     category: "Starters",
     price: "$5.49",
     description: "Fresh romaine lettuce with Caesar dressing",
-    image: "https://via.placeholder.com/150",
+    image: salad,
   },
   {
     id: 3,
@@ -21,7 +25,7 @@ const menuData = [
     category: "Desserts",
     price: "$4.99",
     description: "Warm chocolate cake with gooey center",
-    image: "https://via.placeholder.com/150",
+    image: lava,
   },
 ];
 

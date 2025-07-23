@@ -6,8 +6,16 @@ const Menu = () => {
   const [category, setCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
+  const [favorites, setFavorites] = useState([]);
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
 
   const categories = ["All", ...new Set(menuData.map((item) => item.category))];
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
+    );
+  };
 
   const highlightMatch = (text, query) => {
     if (!query) return text;
@@ -25,6 +33,7 @@ const Menu = () => {
     setCategory("All");
     setSearchTerm("");
     setSortOption("");
+    setShowOnlyFavorites(false);
   };
 
   let filteredMenu = menuData.filter((item) => {
@@ -32,7 +41,9 @@ const Menu = () => {
     const matchesSearch =
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
+    const isFav = favorites.includes(item.id);
+
+    return matchesCategory && matchesSearch && (!showOnlyFavorites || isFav);
   });
 
   if (sortOption === "name") {
@@ -66,6 +77,15 @@ const Menu = () => {
           <option value="price">Price (Low–High)</option>
         </select>
 
+        <label>
+          <input
+            type="checkbox"
+            checked={showOnlyFavorites}
+            onChange={(e) => setShowOnlyFavorites(e.target.checked)}
+          />
+          Show Only Favorites
+        </label>
+
         <button className="clear-btn" onClick={handleClearFilters}>
           Clear
         </button>
@@ -86,12 +106,13 @@ const Menu = () => {
       <div className="menu-grid">
         {filteredMenu.length > 0 ? (
           filteredMenu.map((item) => (
-            <div key={item.id} className="menu-item">
-              <img src={item.image} alt={item.name} />
-              <h3>{highlightMatch(item.name, searchTerm)}</h3>
-              <p>{highlightMatch(item.description, searchTerm)}</p>
-              <strong>{item.price}</strong>
-            </div>
+            <MenuItem
+              key={item.id}
+              item={item}
+              highlightMatch={highlightMatch}
+              isFavorite={favorites.includes(item.id)}
+              toggleFavorite={toggleFavorite}
+            />
           ))
         ) : (
           <p>No items found.</p>
