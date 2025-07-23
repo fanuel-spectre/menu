@@ -27,6 +27,46 @@ const menuData = [
     description: "Warm chocolate cake with gooey center",
     image: lava,
   },
+  {
+    id: 3,
+    name: "Chocolate Lava Cake",
+    category: "Desserts",
+    price: "$4.99",
+    description: "Warm chocolate cake with gooey center",
+    image: lava,
+  },
+  {
+    id: 3,
+    name: "Chocolate Lava Cake",
+    category: "Desserts",
+    price: "$4.99",
+    description: "Warm chocolate cake with gooey center",
+    image: lava,
+  },
+  {
+    id: 3,
+    name: "Chocolate Lava Cake",
+    category: "Desserts",
+    price: "$4.99",
+    description: "Warm chocolate cake with gooey center",
+    image: lava,
+  },
+  {
+    id: 3,
+    name: "Chocolate Lava Cake",
+    category: "Desserts",
+    price: "$4.99",
+    description: "Warm chocolate cake with gooey center",
+    image: lava,
+  },
+  {
+    id: 3,
+    name: "Chocolate Lava Cake",
+    category: "Desserts",
+    price: "$4.99",
+    description: "Warm chocolate cake with gooey center",
+    image: lava,
+  },
 ];
 
 export default menuData;
