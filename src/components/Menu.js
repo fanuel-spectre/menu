@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import menuData from "../data/menuData";
 import MenuItem from "./MenuItem";
+import { FaFilter, FaStar, FaRegStar } from "react-icons/fa";
 
 const Menu = () => {
   const [category, setCategory] = useState("All");
@@ -8,6 +9,8 @@ const Menu = () => {
   const [sortOption, setSortOption] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
+  const [showSortMenu, setShowSortMenu] = useState(false);
+  const sortRef = useRef();
 
   const categories = ["All", ...new Set(menuData.map((item) => item.category))];
 
@@ -28,6 +31,18 @@ const Menu = () => {
       )
     );
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sortRef.current && !sortRef.current.contains(event.target)) {
+        setShowSortMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleClearFilters = () => {
     setCategory("All");
@@ -67,31 +82,50 @@ const Menu = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-        >
-          <option value="">Sort</option>
-          <option value="name">Name (A–Z)</option>
-          <option value="price">Price (Low–High)</option>
-        </select>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={showOnlyFavorites}
-            onChange={(e) => setShowOnlyFavorites(e.target.checked)}
-          />
-          Show Only Favorites
-        </label>
-
         <button className="clear-btn" onClick={handleClearFilters}>
           Clear
+        </button>
+
+        <button
+          className={`favorites-toggle ${showOnlyFavorites ? "active" : ""}`}
+          onClick={() => setShowOnlyFavorites((prev) => !prev)}
+          aria-pressed={showOnlyFavorites}
+          aria-label="Toggle show only favorites"
+          title={
+            showOnlyFavorites ? "Showing Favorites" : "Show Only Favorites"
+          }
+        >
+          {showOnlyFavorites ? <FaStar /> : <FaRegStar />}
         </button>
       </div>
 
       <div className="category-tabs">
+        <div className="sort-menu-wrapper" ref={sortRef}>
+          <FaFilter
+            className="sort-icon"
+            onClick={() => setShowSortMenu(!showSortMenu)}
+          />
+          {showSortMenu && (
+            <div className="sort-dropdown">
+              <div
+                onClick={() => {
+                  setSortOption("name");
+                  setShowSortMenu(false);
+                }}
+              >
+                Name (A–Z)
+              </div>
+              <div
+                onClick={() => {
+                  setSortOption("price");
+                  setShowSortMenu(false);
+                }}
+              >
+                Price (Low–High)
+              </div>
+            </div>
+          )}
+        </div>
         {categories.map((cat) => (
           <button
             key={cat}
