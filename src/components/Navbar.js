@@ -1,54 +1,166 @@
-import React, { useState, useEffect } from "react";
-import "./Navbar.css";
+// components/Navbar.js
+import React, { useState, useRef, useEffect } from "react";
+import { BiFontFamily } from "react-icons/bi";
+import { FaBars, FaHome, FaUtensils, FaPhone, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
-  const [theme, setTheme] = useState("light");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const menuRef = useRef(null);
+  const hamburgerRef = useRef(null);
+
+  const handleResize = () => setIsMobile(window.innerWidth < 768);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(e.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
   };
 
   return (
-    <nav className="navbar">
-      <div className="nav-left">
-        <h2 className="logo">🍽️ MenuApp</h2>
-        <div className="hamburger" onClick={toggleMenu}>
-          ☰
-        </div>
+    <nav style={styles.nav}>
+      <div style={styles.logo}>
+        <img
+          src={require("../assets/restaurant.png")}
+          alt="Logo"
+          style={styles.logoImg}
+        />
+        <span style={styles.logoText}>bon appetit</span>
       </div>
 
-      <ul className={`nav-links ${menuOpen ? "show" : ""}`}>
-        <li>
-          <a href="#home" onClick={() => setMenuOpen(false)}>
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#menu" onClick={() => setMenuOpen(false)}>
-            Menu
-          </a>
-        </li>
-        <li>
-          <a href="#contact" onClick={() => setMenuOpen(false)}>
-            Contact
-          </a>
-        </li>
-        <li>
-          <button className="toggle-btn" onClick={toggleTheme}>
-            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-          </button>
-        </li>
-      </ul>
+      {isMobile ? (
+        <div
+          ref={hamburgerRef}
+          style={styles.hamburger}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </div>
+      ) : (
+        <ul style={styles.navLinks}>
+          <li onClick={() => scrollToSection("home")} style={styles.link}>
+            <FaHome /> Home
+          </li>
+          <li onClick={() => scrollToSection("menu")} style={styles.link}>
+            <FaUtensils /> Menu
+          </li>
+          <li onClick={() => scrollToSection("contact")} style={styles.link}>
+            <FaPhone /> Contact
+          </li>
+        </ul>
+      )}
+
+      {isMobile && menuOpen && (
+        <div ref={menuRef} style={styles.dropdown}>
+          <ul style={styles.menuList}>
+            <li onClick={() => scrollToSection("home")} style={styles.menuItem}>
+              <FaHome /> Home
+            </li>
+            <li onClick={() => scrollToSection("menu")} style={styles.menuItem}>
+              <FaUtensils /> Menu
+            </li>
+            <li
+              onClick={() => scrollToSection("contact")}
+              style={styles.menuItem}
+            >
+              <FaPhone /> Contact
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
+};
+
+const styles = {
+  nav: {
+    backgroundColor: "#ffe8cc",
+    padding: "10px 20px",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    position: "sticky",
+    top: 0,
+    zIndex: 1000,
+    boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+  },
+  logo: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+  logoImg: {
+    height: "40px",
+  },
+  logoText: {
+    fontSize: "20px",
+    fontWeight: "bold",
+    color: "black",
+  },
+  navLinks: {
+    display: "flex",
+    gap: "20px",
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+    cursor: "pointer",
+  },
+  hamburger: {
+    color: "white",
+    cursor: "pointer",
+  },
+  dropdown: {
+    position: "absolute",
+    top: "60px",
+    left: 0,
+    width: "100%",
+    backgroundColor: "#276749",
+    transition: "0.3s",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+  },
+  menuList: {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+  },
+  menuItem: {
+    padding: "12px 20px",
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    borderBottom: "1px solid rgba(255,255,255,0.1)",
+    cursor: "pointer",
+    color: "white",
+  },
+  link: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    color: "white",
+    cursor: "pointer",
+    fontSize: "16px",
+  },
 };
 
 export default Navbar;

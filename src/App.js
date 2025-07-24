@@ -7,7 +7,6 @@
   const App = () => (
     <div className="App" id="home">
       <Navbar />
-      <Header />
       <div id="menu">
         <Menu />
       </div>
