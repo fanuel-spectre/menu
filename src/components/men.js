@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import menuData from "../data/menuData";
 import MenuItem from "./MenuItem";
-import { FaFilter, FaStar, FaRegStar } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa";
 
 const Menu = () => {
   const [category, setCategory] = useState("All");
@@ -10,7 +10,7 @@ const Menu = () => {
   const [favorites, setFavorites] = useState([]);
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
-    const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0 });
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0 });
   const sortRef = useRef();
 
   const categories = ["All", ...new Set(menuData.map((item) => item.category))];
@@ -35,14 +35,13 @@ const Menu = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Close dropdown if clicking outside
       if (sortRef.current && !sortRef.current.contains(event.target)) {
         setShowSortMenu(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleToggleSortMenu = () => {
@@ -98,17 +97,14 @@ const Menu = () => {
           Clear
         </button>
 
-        <button
-          className={`favorites-toggle ${showOnlyFavorites ? "active" : ""}`}
-          onClick={() => setShowOnlyFavorites((prev) => !prev)}
-          aria-pressed={showOnlyFavorites}
-          aria-label="Toggle show only favorites"
-          title={
-            showOnlyFavorites ? "Showing Favorites" : "Show Only Favorites"
-          }
-        >
-          {showOnlyFavorites ? <FaStar /> : <FaRegStar />}
-        </button>
+        <label>
+          <input
+            type="checkbox"
+            checked={showOnlyFavorites}
+            onChange={(e) => setShowOnlyFavorites(e.target.checked)}
+          />
+          Favorites
+        </label>
       </div>
 
       <div
