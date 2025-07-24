@@ -10,7 +10,7 @@ const Menu = () => {
   const [favorites, setFavorites] = useState([]);
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
-    const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0 });
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0 });
   const sortRef = useRef();
 
   const categories = ["All", ...new Set(menuData.map((item) => item.category))];
@@ -21,12 +21,19 @@ const Menu = () => {
     );
   };
 
-  const highlightMatch = (text, query) => {
-    if (!query) return text;
-    const parts = text.split(new RegExp(`(${query})`, "gi"));
-    return parts.map((part, i) =>
-      part.toLowerCase() === query.toLowerCase() ? (
-        <mark key={i}>{part}</mark>
+  const handleCategoryClick = (category) => {
+    setCategory(category);
+  };
+
+  const highlightMatch = (text, term) => {
+    if (!term) return text;
+    const regex = new RegExp(`(${term})`, "gi");
+    const parts = text.split(regex);
+    return parts.map((part, index) =>
+      regex.test(part) ? (
+        <span key={index} style={{ backgroundColor: "yellow" }}>
+          {part}
+        </span>
       ) : (
         part
       )
@@ -63,24 +70,38 @@ const Menu = () => {
     setShowOnlyFavorites(false);
   };
 
-  let filteredMenu = menuData.filter((item) => {
-    const matchesCategory = category === "All" || item.category === category;
-    const matchesSearch =
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const isFav = favorites.includes(item.id);
+  // --- Filtering ---
+  let filteredMenu = menuData.filter(
+    (item) =>
+      (category === "All" || item.category === category) &&
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-    return matchesCategory && matchesSearch && (!showOnlyFavorites || isFav);
-  });
+  if (category !== "All") {
+    filteredMenu = filteredMenu.filter((item) => item.category === category);
+  }
 
+  if (searchTerm) {
+    filteredMenu = filteredMenu.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  if (showOnlyFavorites) {
+    filteredMenu = filteredMenu.filter((item) => favorites.includes(item.id));
+  }
+
+  // --- Sorting ---
   if (sortOption === "name") {
     filteredMenu.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortOption === "price") {
-    filteredMenu.sort((a, b) => {
-      const priceA = parseFloat(a.price.replace("$", ""));
-      const priceB = parseFloat(b.price.replace("$", ""));
-      return priceA - priceB;
-    });
+    filteredMenu.sort(
+      (a, b) =>
+        parseFloat(a.price.replace(/[^0-9.]/g, "")) -
+        parseFloat(b.price.replace(/[^0-9.]/g, ""))
+    );
   }
 
   return (
@@ -97,12 +118,10 @@ const Menu = () => {
         <button className="clear-btn" onClick={handleClearFilters}>
           Clear
         </button>
-
         <button
           className={`favorites-toggle ${showOnlyFavorites ? "active" : ""}`}
           onClick={() => setShowOnlyFavorites((prev) => !prev)}
           aria-pressed={showOnlyFavorites}
-          aria-label="Toggle show only favorites"
           title={
             showOnlyFavorites ? "Showing Favorites" : "Show Only Favorites"
           }
@@ -112,17 +131,71 @@ const Menu = () => {
       </div>
 
       <div
+        className="sort-menu-wrapper"
+        ref={sortRef}
+        style={{ display: "inline-block", position: "relative" }}
+      >
+        <FaFilter
+          className="sort-icon"
+          onClick={handleToggleSortMenu}
+          style={{ cursor: "pointer" }}
+        />
+        {showSortMenu && (
+          <div
+            className="sort-dropdown"
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              marginTop: "8px",
+              background: "white",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+              width: "140px",
+              zIndex: 1000,
+            }}
+          >
+            <button
+              onClick={() => {
+                setSortOption("name");
+                setShowSortMenu(false);
+              }}
+              style={{
+                padding: "8px",
+                cursor: "pointer",
+                width: "100%",
+                textAlign: "left",
+                border: "none",
+                background: "transparent",
+              }}
+            >
+              Name (A–Z)
+            </button>
+            <button
+              onClick={() => {
+                setSortOption("price");
+                setShowSortMenu(false);
+              }}
+              style={{
+                padding: "8px",
+                cursor: "pointer",
+                width: "100%",
+                textAlign: "left",
+                border: "none",
+                background: "transparent",
+              }}
+            >
+              Price (Low–High)
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div
         className="category-tabs"
         style={{ overflowX: "auto", whiteSpace: "nowrap" }}
       >
-        <div
-          className="sort-menu-wrapper"
-          ref={sortRef}
-          style={{ display: "inline-block", position: "relative" }}
-        >
-          <FaFilter className="sort-icon" onClick={handleToggleSortMenu} />
-        </div>
-
         {categories.map((cat) => (
           <button
             key={cat}
@@ -135,49 +208,13 @@ const Menu = () => {
         ))}
       </div>
 
-      {showSortMenu && (
-        <div
-          className="sort-dropdown"
-          style={{
-            position: "absolute",
-            top: dropdownPos.top,
-            left: dropdownPos.left,
-            zIndex: 9999,
-            background: "white",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-            width: "140px",
-          }}
-        >
-          <div
-            onClick={() => {
-              setSortOption("name");
-              setShowSortMenu(false);
-            }}
-            style={{ padding: "8px", cursor: "pointer" }}
-          >
-            Name (A–Z)
-          </div>
-          <div
-            onClick={() => {
-              setSortOption("price");
-              setShowSortMenu(false);
-            }}
-            style={{ padding: "8px", cursor: "pointer" }}
-          >
-            Price (Low–High)
-          </div>
-        </div>
-      )}
-
       <div className="menu-grid">
         {filteredMenu.length > 0 ? (
           filteredMenu.map((item) => (
             <MenuItem
               key={item.id}
               item={item}
-              highlightMatch={highlightMatch}
+              highlightMatch={(text) => highlightMatch(text, searchTerm)}
               isFavorite={favorites.includes(item.id)}
               toggleFavorite={toggleFavorite}
             />
