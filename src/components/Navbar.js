@@ -1,6 +1,5 @@
 // components/Navbar.js
 import React, { useState, useRef, useEffect } from "react";
-import { BiFontFamily } from "react-icons/bi";
 import { FaBars, FaHome, FaUtensils, FaPhone, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
@@ -135,7 +134,7 @@ const styles = {
     top: "60px",
     left: 0,
     width: "100%",
-    backgroundColor: "#276749",
+    backgroundColor: "#ffe8cc",
     transition: "0.3s",
     boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
   },
@@ -151,7 +150,7 @@ const styles = {
     gap: "10px",
     borderBottom: "1px solid rgba(255,255,255,0.1)",
     cursor: "pointer",
-    color: "white",
+    color: "black",
   },
   link: {
     display: "flex",

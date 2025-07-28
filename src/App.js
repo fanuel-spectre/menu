@@ -1,12 +1,13 @@
   import React from "react";
-  import Header from "./components/Header";
   import Menu from "./components/Menu";
   import Navbar from "./components/Navbar";
+  import TodaysSpecial from "./components/TodaysSpecial";
   import "./App.css";
 
   const App = () => (
     <div className="App" id="home">
       <Navbar />
+      <TodaysSpecial />
       <div id="menu">
         <Menu />
       </div>

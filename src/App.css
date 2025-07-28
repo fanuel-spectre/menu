@@ -20,13 +20,16 @@
 }
 
 .App {
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
   text-align: center;
-  font-family: Arial, sans-serif;
-  padding: 1rem;
-    max-width: 1200px;
-    margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -75,6 +78,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  
 }
 
 
@@ -381,4 +385,5 @@ mark {
 .favorites-toggle.active {
   color: #ffd700; /* gold star */
 }
+
 
