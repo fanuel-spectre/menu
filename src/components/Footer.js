@@ -3,6 +3,11 @@ import React from "react";
 export default function Footer() {
   return (
     <footer style={styles.footer}>
+      <img
+        src={require("../assets/restaurant.png")}
+        alt="Logo"
+        style={styles.logoImg}
+      />
       <hr style={{ margin: "20px 0", border: "1px solid #ccc" }} />
       <div style={styles.content}>
         <div style={styles.section}>
@@ -78,5 +83,13 @@ const styles = {
     paddingTop: "10px",
     fontSize: "14px",
     marginTop: "20px",
+  },
+  logo: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+  logoImg: {
+    height: "50px",
   },
 };
