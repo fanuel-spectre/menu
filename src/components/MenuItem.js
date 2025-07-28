@@ -17,11 +17,13 @@ const MenuItem = ({ item, highlightMatch, isFavorite, toggleFavorite }) => (
         )}
       </button>
     </div>
-    <h3>{highlightMatch ? highlightMatch(item.name, "") : item.name}</h3>
+    <h3 style={{ fontFamily: "'Libre Baskerville', serif" }}>
+      {highlightMatch ? highlightMatch(item.name, "") : item.name}
+    </h3>
     <p>
       {highlightMatch ? highlightMatch(item.description, "") : item.description}
     </p>
-    <strong>{item.price}</strong>
+    <strong >{item.price}</strong>
   </div>
 );
 
