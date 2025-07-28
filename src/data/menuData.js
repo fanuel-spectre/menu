@@ -6,6 +6,10 @@ import bread from "../assets/bread.jpg";
 import minestrone from "../assets/minestrone.jpg";
 import panna from "../assets/panna.jpg";
 import tiramisu from "../assets/tiramisu.jpg";
+import spritz from "../assets/spritz.jpg";
+import pina from "../assets/pina.jpg";
+import sunrise from "../assets/sunrise.jpg";
+import pepper from "../assets/pepper.jpg";
 
 const menuData = [
   {
@@ -34,6 +38,15 @@ const menuData = [
   },
   {
     id: 4,
+    name: "Piña Colada",
+    category: "Cocktails",
+    price: "$14.99",
+    description:
+      "A tropical cocktail made with rum, coconut cream, and pineapple juice.",
+    image: pina,
+  },
+  {
+    id: 5,
     name: "Grilled Chicken",
     category: "Main",
     price: "$10.99",
@@ -41,7 +54,24 @@ const menuData = [
     image: chicken,
   },
   {
-    id: 5,
+    id: 6,
+    name: "Red Pepper Soup",
+    category: "Starters",
+    price: "$5.99",
+    description: "A spicy and flavorful soup made with roasted red peppers.",
+    image: pepper,
+  },
+  {
+    id: 7,
+    name: "Tequila Sunrise",
+    category: "Cocktails",
+    price: "$9.99",
+    description:
+      "A refreshing cocktail with tequila, orange juice, and grenadine.",
+    image: sunrise,
+  },
+  {
+    id: 8,
     name: "Tiramisu",
     category: "Desserts",
     price: "$5.49",
@@ -49,7 +79,7 @@ const menuData = [
     image: tiramisu,
   },
   {
-    id: 6,
+    id: 9,
     name: "Minestrone Soup",
     category: "Starters",
     price: "$4.49",
@@ -57,7 +87,7 @@ const menuData = [
     image: minestrone,
   },
   {
-    id: 7,
+    id: 10,
     name: "Panna Cotta",
     category: "Desserts",
     price: "$5.99",
@@ -65,12 +95,21 @@ const menuData = [
     image: panna,
   },
   {
-    id: 8,
+    id: 11,
     name: "Garlic Bread",
     category: "Starters",
     price: "$3.99",
     description: "Toasted bread with garlic and butter",
     image: bread,
+  },
+  {
+    id: 12,
+    name: "Pink Gin Spritz",
+    category: "Cocktails",
+    price: "$23.99",
+    description:
+      "A refreshing cocktail with gin, tonic, and a hint of pink grapefruit.",
+    image: spritz,
   },
 ];
 
