@@ -27,7 +27,9 @@ const specials = [
 const TodaysSpecial = () => {
   return (
     <div className="specials-section" id="specials">
-      <h2>Today's Specials</h2>
+      <h2 style={{ fontFamily: "'Great Vibes', cursive" }}>
+        Today's Specials
+      </h2>
       <Carousel
         showThumbs={false}
         infiniteLoop

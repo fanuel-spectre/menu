@@ -11,7 +11,7 @@ export default function Footer() {
       <hr style={{ margin: "20px 0", border: "1px solid #ccc" }} />
       <div style={styles.content}>
         <div style={styles.section}>
-          <h3 style={styles.title}>Delish Dine</h3>
+          <h3 style={styles.title}>Bon Appétit</h3>
           <p>Serving joy one plate at a time.</p>
         </div>
         <div style={styles.section}>
@@ -21,7 +21,7 @@ export default function Footer() {
         </div>
         <div style={styles.section}>
           <h4 style={styles.subtitle}>Visit Us</h4>
-          <p>Delish Dine Restaurant</p>
+          <p style={{ fontFamily: "'Great Vibes', cursive" }}>Bon Appétit</p>
           <p>456 Tasty Avenue, Flavor Town</p>
           <p>Gourmet City, Foodland 9876</p>
         </div>
@@ -41,7 +41,7 @@ export default function Footer() {
 
       <div style={styles.bottomBar}>
         <p>
-          &copy; {new Date().getFullYear()} Delish Dine. All rights reserved.
+          &copy; {new Date().getFullYear()} Bon Appétit. All rights reserved.
         </p>
       </div>
     </footer>
@@ -68,6 +68,7 @@ const styles = {
   title: {
     fontSize: "24px",
     marginBottom: "10px",
+    fontFamily: "'Great Vibes', cursive",
   },
   subtitle: {
     fontSize: "18px",

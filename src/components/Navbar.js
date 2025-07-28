@@ -44,7 +44,8 @@ const Navbar = () => {
           alt="Logo"
           style={styles.logoImg}
         />
-        <span style={styles.logoText}>bon appetit</span>
+        <span style={styles.logoText}>Bon Appétit</span>
+        {/* <h2 style={{ fontFamily: "'Great Vibes', cursive" }}>Bon Appétit</h2> */}
       </div>
 
       {isMobile ? (
@@ -113,9 +114,10 @@ const styles = {
     height: "40px",
   },
   logoText: {
-    fontSize: "20px",
+    fontSize: "30px",
     fontWeight: "bold",
     color: "black",
+    fontFamily: "'Great Vibes', cursive",
   },
   navLinks: {
     display: "flex",
