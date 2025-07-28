@@ -28,7 +28,9 @@ const AppContent = () => {
           <div id="menu">
             <Menu />
           </div>
-          <Footer />
+          <div id="footer">
+            <Footer />
+          </div>
         </>
       )}
     </div>

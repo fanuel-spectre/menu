@@ -64,7 +64,7 @@ const Navbar = () => {
           <li onClick={() => scrollToSection("menu")} style={styles.link}>
             <FaUtensils /> Menu
           </li>
-          <li onClick={() => scrollToSection("contact")} style={styles.link}>
+          <li onClick={() => scrollToSection("footer")} style={styles.link}>
             <FaPhone /> Contact
           </li>
         </ul>
@@ -80,7 +80,7 @@ const Navbar = () => {
               <FaUtensils /> Menu
             </li>
             <li
-              onClick={() => scrollToSection("contact")}
+              onClick={() => scrollToSection("footer")}
               style={styles.menuItem}
             >
               <FaPhone /> Contact
