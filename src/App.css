@@ -196,9 +196,9 @@ header p {
 }
 
 @media (max-width: 480px) {
-  .App {
+  /* .App {
     padding: 0.5rem;
-  }
+  } */
 
   header h1 {
     font-size: 1.3rem;
