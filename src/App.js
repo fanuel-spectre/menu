@@ -2,6 +2,7 @@
   import Menu from "./components/Menu";
   import Navbar from "./components/Navbar";
   import TodaysSpecial from "./components/TodaysSpecial";
+  import Footer from "./components/Footer";
   import "./App.css";
 
   const App = () => (
@@ -11,9 +12,7 @@
       <div id="menu">
         <Menu />
       </div>
-      <div id="contact">
-        <p>📞 Contact us at +123456789</p>
-      </div>
+      <Footer />
     </div>
   );
 
