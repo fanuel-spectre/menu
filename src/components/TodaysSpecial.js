@@ -8,19 +8,19 @@ import tiramisu from "../assets/tiramisu.jpg";
 
 const specials = [
   {
-    name: "Spicy Chicken Wings",
+    name: "Chicken Breast",
     image: chicken,
-    description: "Crispy wings tossed in our signature hot sauce.",
+    description: "Juicy chicken breast grilled to perfection.",
   },
   {
-    name: "Grilled Salmon",
+    name: "Minestrone Soup",
     image: minestrone,
-    description: "Fresh salmon fillet grilled to perfection.",
+    description: "A hearty Italian soup loaded with fresh vegetables.",
   },
   {
-    name: "Veggie Delight Pizza",
+    name: "Tiramisu",
     image: tiramisu,
-    description: "Loaded with colorful vegetables and mozzarella.",
+    description: "A classic Italian dessert made with coffee-soaked ladyfingers and mascarpone cheese.",
   },
 ];
 
