@@ -1,19 +1,44 @@
-  import React from "react";
-  import Menu from "./components/Menu";
-  import Navbar from "./components/Navbar";
-  import TodaysSpecial from "./components/TodaysSpecial";
-  import Footer from "./components/Footer";
-  import "./App.css";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Menu from "./components/Menu";
+import TodaysSpecial from "./components/TodaysSpecial";
+import Footer from "./components/Footer";
+import SimpleMenu from "./components/SimpleMenu";
+import "./App.css";
 
-  const App = () => (
+const AppContent = () => {
+  const location = useLocation();
+  const isSimpleMenu = location.pathname === "/simple-menu";
+
+  return (
     <div className="App" id="home">
       <Navbar />
-      <TodaysSpecial />
-      <div id="menu">
-        <Menu />
-      </div>
-      <Footer />
+      <Routes>
+        <Route path="/simple-menu" element={<SimpleMenu />} />
+      </Routes>
+      {!isSimpleMenu && (
+        <>
+          <TodaysSpecial />
+          <div id="menu">
+            <Menu />
+          </div>
+          <Footer />
+        </>
+      )}
     </div>
   );
+};
 
-  export default App;
+const App = () => (
+  <Router>
+    <AppContent />
+  </Router>
+);
+
+export default App;

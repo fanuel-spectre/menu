@@ -1,0 +1,37 @@
+.simple-menu-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    font-family: 'Playfair Display', serif;
+    color: #222;
+  }
+  
+  .simple-menu-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .menu-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  .menu-name {
+    flex: 1;
+  }
+  
+  .menu-dots {
+    flex: 1;
+    border-bottom: 1px dotted #aaa;
+    margin: 0 0.5rem;
+  }
+  
+  .menu-price {
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+  
