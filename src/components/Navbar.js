@@ -1,12 +1,22 @@
 // components/Navbar.js
 import React, { useState, useRef, useEffect } from "react";
-import { FaBars, FaHome, FaUtensils, FaPhone, FaTimes } from "react-icons/fa";
+import {
+  FaBars,
+  FaHome,
+  FaUtensils,
+  FaLightbulb,
+  FaPhone,
+  FaTimes,
+  FaList,
+} from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const menuRef = useRef(null);
   const hamburgerRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleResize = () => setIsMobile(window.innerWidth < 768);
 
@@ -36,17 +46,21 @@ const Navbar = () => {
     setMenuOpen(false);
   };
 
+  const goToSimpleMenu = () => {
+    navigate("/simple-menu");
+    setMenuOpen(false);
+  };
+
   return (
     <nav style={styles.nav}>
-      <div style={styles.logo}>
+      <Link to="/"  style={styles.logo}>
         <img
           src={require("../assets/restaurant.png")}
           alt="Logo"
           style={styles.logoImg}
         />
         <span style={styles.logoText}>Bon Appétit</span>
-        {/* <h2 style={{ fontFamily: "'Great Vibes', cursive" }}>Bon Appétit</h2> */}
-      </div>
+      </Link>
 
       {isMobile ? (
         <div
@@ -67,6 +81,14 @@ const Navbar = () => {
           <li onClick={() => scrollToSection("footer")} style={styles.link}>
             <FaPhone /> Contact
           </li>
+          <li>
+            <Link
+              to="/simple-menu"
+              style={{ ...styles.link, textDecoration: "none" }}
+            >
+              <FaLightbulb /> Menu Lite
+            </Link>
+          </li>
         </ul>
       )}
 
@@ -84,6 +106,15 @@ const Navbar = () => {
               style={styles.menuItem}
             >
               <FaPhone /> Contact
+            </li>
+            <li>
+              <Link
+                to="/simple-menu"
+                onClick={() => setMenuOpen(false)}
+                style={{ ...styles.menuItem, textDecoration: "none" }}
+              >
+                <FaLightbulb /> Menu Lite
+              </Link>
             </li>
           </ul>
         </div>
@@ -109,6 +140,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "10px",
+    textDecoration: "none",
   },
   logoImg: {
     height: "40px",

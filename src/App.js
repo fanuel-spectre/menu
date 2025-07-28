@@ -10,6 +10,7 @@ import Menu from "./components/Menu";
 import TodaysSpecial from "./components/TodaysSpecial";
 import Footer from "./components/Footer";
 import SimpleMenu from "./components/SimpleMenu";
+import ScrollToTop from "./components/ScrollToTop";
 import "./App.css";
 
 const AppContent = () => {
@@ -18,6 +19,7 @@ const AppContent = () => {
 
   return (
     <div className="App" id="home">
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/simple-menu" element={<SimpleMenu />} />
@@ -28,11 +30,11 @@ const AppContent = () => {
           <div id="menu">
             <Menu />
           </div>
-          <div id="footer">
-            <Footer />
-          </div>
         </>
       )}
+      <div id="footer">
+        <Footer />
+      </div>
     </div>
   );
 };

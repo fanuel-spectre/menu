@@ -1,37 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+
 .simple-menu-container {
-    max-width: 600px;
-    margin: 2rem auto;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: 'Georgia', serif;
+  color: #2c2c2c;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.simple-menu-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.menu-category {
+  margin-bottom: 2rem;
+}
+
+.category-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  border-bottom: 1px dashed #aaa;
+  padding-bottom: 0.25rem;
+}
+
+.simple-menu-item {
+  border-bottom: 1px solid #eee;
+  padding: 0.8rem 0;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.item-name {
+  font-family: 'Playfair Display', serif;
+  flex: 1;
+  min-width: 50%;
+}
+
+.item-price {
+  font-style: italic;
+  color: #444;
+  text-align: right;
+  min-width: 80px;
+}
+
+.item-description {
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ✅ Print-friendly styles */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .simple-menu-container {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-btn {
+    display: none;
+  }
+
+  .item-description {
+    color: #000;
+    font-size: 0.85rem;
+  }
+}
+
+/* ✅ Full Mobile Responsiveness */
+@media (max-width: 600px) {
+  .simple-menu-container {
     padding: 1rem;
-    font-family: 'Playfair Display', serif;
-    color: #222;
   }
-  
+
   .simple-menu-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
   }
-  
-  .menu-line {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    margin-bottom: 1rem;
+
+  .category-title {
+    font-size: 1.4rem;
   }
-  
-  .menu-name {
-    flex: 1;
+
+  .item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
   }
-  
-  .menu-dots {
-    flex: 1;
-    border-bottom: 1px dotted #aaa;
-    margin: 0 0.5rem;
+
+  .item-name,
+  .item-price {
+    text-align: left;
+    font-size: 1.05rem;
   }
-  
-  .menu-price {
-    white-space: nowrap;
-    margin-left: 0.5rem;
+
+  .item-description {
+    font-size: 0.9rem;
   }
-  
+}
