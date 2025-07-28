@@ -130,6 +130,7 @@ header p {
 /* Menu Grid */
 .menu-grid {
   display: grid;
+  padding-top: 0.7rem;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
 }
