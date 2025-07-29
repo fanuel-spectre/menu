@@ -2,6 +2,30 @@ import React, { useState } from "react";
 import "./SimpleMenu.css";
 
 const simpleMenuItems = {
+  Breakfast: [
+    {
+      name: "Pancakes",
+      description: "Fluffy pancakes served with maple syrup and butter",
+      price: "$4",
+    },
+    {
+      name: "Omelette",
+      description: "Three-egg omelette with cheese, ham, and vegetables",
+      price: "$5",
+    },
+    {
+      name: "Avocado Toast",
+      description:
+        "Toasted sourdough topped with smashed avocado and chili flakes",
+      price: "$6",
+    },
+    {
+      name: "English Breakfast",
+      description:
+        "Eggs, bacon, sausages, baked beans, toast, and grilled tomato",
+      price: "$8",
+    },
+  ],
   Starters: [
     {
       name: "Greek Salad",
@@ -11,6 +35,17 @@ const simpleMenuItems = {
     {
       name: "Tomato Soup",
       description: "Roasted tomatoes, basil, and a dash of cream",
+      price: "$5",
+    },
+    {
+      name: "Bruschetta",
+      description:
+        "Grilled bread topped with fresh tomatoes, garlic, and basil",
+      price: "$4",
+    },
+    {
+      name: "Stuffed Mushrooms",
+      description: "Mushroom caps filled with cheese and herbs",
       price: "$5",
     },
   ],
@@ -25,6 +60,16 @@ const simpleMenuItems = {
       description: "Creamy parmesan sauce with mushrooms and grilled shrimp",
       price: "$8",
     },
+    {
+      name: "Beef Burger",
+      description: "Juicy beef patty with lettuce, tomato, and house sauce",
+      price: "$9",
+    },
+    {
+      name: "Fish Tacos",
+      description: "Crispy battered fish with slaw and lime crema",
+      price: "$7",
+    },
   ],
   Desserts: [
     {
@@ -37,8 +82,19 @@ const simpleMenuItems = {
       description: "Coffee-soaked ladyfingers layered with mascarpone cream",
       price: "$6",
     },
+    {
+      name: "Cheesecake",
+      description: "Creamy New York-style cheesecake with berry compote",
+      price: "$6",
+    },
+    {
+      name: "Ice Cream Trio",
+      description: "Three scoops of assorted gourmet ice cream",
+      price: "$4",
+    },
   ],
 };
+  
 
 const SimpleMenu = () => {
   const [searchTerm, setSearchTerm] = useState("");
