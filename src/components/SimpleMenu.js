@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SimpleMenu.css";
 
 const simpleMenuItems = {
@@ -41,27 +41,77 @@ const simpleMenuItems = {
 };
 
 const SimpleMenu = () => {
-  return (
-    <div className="simple-menu-container">
-      <h1 className="simple-menu-title">Today's Menu</h1>
-      <button className="print-btn" onClick={() => window.print()}>
-        🖨️ Print Menu
-      </button>
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-      {Object.keys(simpleMenuItems).map((category, idx) => (
-        <div key={idx} className="menu-category">
-          <h2 className="category-title">{category}</h2>
-          {simpleMenuItems[category].map((item, i) => (
-            <div className="simple-menu-item" key={i}>
-              <div className="item-header">
-                <span className="item-name">{item.name}</span>
-                <span className="item-price">{item.price}</span>
-              </div>
-              <p className="item-description">{item.description}</p>
-            </div>
+  const filteredMenu = Object.entries(simpleMenuItems).reduce(
+    (acc, [category, items]) => {
+      if (selectedCategory !== "All" && category !== selectedCategory)
+        return acc;
+
+      const filteredItems = items.filter(
+        (item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      if (filteredItems.length > 0) {
+        acc[category] = filteredItems;
+      }
+
+      return acc;
+    },
+    {}
+  );
+  return (
+    <div>
+      <div className="menu-controls">
+        <input
+          type="text"
+          placeholder="Search dishes..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="category-filter"
+        >
+          <option value="All">All</option>
+          {Object.keys(simpleMenuItems).map((category, idx) => (
+            <option key={idx} value={category}>
+              {category}
+            </option>
           ))}
-        </div>
-      ))}
+        </select>
+      </div>
+      <div className="simple-menu-container">
+        <h1
+          className="simple-menu-title"
+          style={{ fontFamily: "'Great Vibes', cursive" }}
+        >
+          Today's Menu
+        </h1>
+        {/* <button className="print-btn" onClick={() => window.print()}>
+        🖨️ Print Menu
+      </button> */}
+
+        {Object.keys(filteredMenu).map((category, idx) => (
+          <div key={idx} className="menu-category">
+            <h2 className="category-title">{category}</h2>
+            {filteredMenu[category].map((item, i) => (
+              <div className="simple-menu-item" key={i}>
+                <div className="item-header">
+                  <span className="item-name">{item.name}</span>
+                  <span className="item-price">{item.price}</span>
+                </div>
+                <p className="item-description">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

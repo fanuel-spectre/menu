@@ -22,8 +22,8 @@ export default function Footer() {
         <div style={styles.section}>
           <h4 style={styles.subtitle}>Visit Us</h4>
           <p style={{ fontFamily: "'Great Vibes', cursive" }}>Bon Appétit</p>
-          <p>456 Tasty Avenue, Flavor Town</p>
-          <p>Gourmet City, Foodland 9876</p>
+          <p>Summit Avenue, Safari</p>
+          <p>Addis Ababa, Ethiopia</p>
         </div>
       </div>
 

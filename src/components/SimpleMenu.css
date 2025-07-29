@@ -2,11 +2,11 @@
 
 .simple-menu-container {
   max-width: 800px;
-  margin: 2rem auto;
+  margin: 1.5rem 0.5rem;
   padding: 1.5rem;
   font-family: 'Georgia', serif;
   color: #2c2c2c;
-  background-color: #fff;
+  background-color: #ebe9e9;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
@@ -118,3 +118,36 @@
     font-size: 0.9rem;
   }
 }
+
+@media (max-width: 500px) {
+    .item-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+  
+    .item-price {
+      margin-left: 0;
+      margin-top: 4px;
+    }
+  }
+  .search-bar{
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .category-filter {
+    padding: 8px;
+    margin-top: 15px;
+    margin-left: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 25%;
+    max-width: 250px;
+  }
