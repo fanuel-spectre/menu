@@ -1,99 +1,116 @@
 import React, { useState } from "react";
 import "./SimpleMenu.css";
+import lava from "../assets/lava.jpg";
+import bread from "../assets/bread.jpg";
+import minestrone from "../assets/minestrone.jpg";
+import chicken from "../assets/chicken.jpg";
 
 const simpleMenuItems = {
-  Breakfast: [
-    {
-      name: "Pancakes",
-      description: "Fluffy pancakes served with maple syrup and butter",
-      price: "$4",
-    },
-    {
-      name: "Omelette",
-      description: "Three-egg omelette with cheese, ham, and vegetables",
-      price: "$5",
-    },
-    {
-      name: "Avocado Toast",
-      description:
-        "Toasted sourdough topped with smashed avocado and chili flakes",
-      price: "$6",
-    },
-    {
-      name: "English Breakfast",
-      description:
-        "Eggs, bacon, sausages, baked beans, toast, and grilled tomato",
-      price: "$8",
-    },
-  ],
-  Starters: [
-    {
-      name: "Greek Salad",
-      description: "Feta cheese, olives, tomatoes, cucumbers & vinaigrette",
-      price: "$6",
-    },
-    {
-      name: "Tomato Soup",
-      description: "Roasted tomatoes, basil, and a dash of cream",
-      price: "$5",
-    },
-    {
-      name: "Bruschetta",
-      description:
-        "Grilled bread topped with fresh tomatoes, garlic, and basil",
-      price: "$4",
-    },
-    {
-      name: "Stuffed Mushrooms",
-      description: "Mushroom caps filled with cheese and herbs",
-      price: "$5",
-    },
-  ],
-  Mains: [
-    {
-      name: "Grilled Chicken",
-      description: "Served with garlic herb butter and steamed vegetables",
-      price: "$10",
-    },
-    {
-      name: "Pasta Alfredo",
-      description: "Creamy parmesan sauce with mushrooms and grilled shrimp",
-      price: "$8",
-    },
-    {
-      name: "Beef Burger",
-      description: "Juicy beef patty with lettuce, tomato, and house sauce",
-      price: "$9",
-    },
-    {
-      name: "Fish Tacos",
-      description: "Crispy battered fish with slaw and lime crema",
-      price: "$7",
-    },
-  ],
-  Desserts: [
-    {
-      name: "Chocolate Lava Cake",
-      description: "Warm molten chocolate center with vanilla ice cream",
-      price: "$5",
-    },
-    {
-      name: "Tiramisu",
-      description: "Coffee-soaked ladyfingers layered with mascarpone cream",
-      price: "$6",
-    },
-    {
-      name: "Cheesecake",
-      description: "Creamy New York-style cheesecake with berry compote",
-      price: "$6",
-    },
-    {
-      name: "Ice Cream Trio",
-      description: "Three scoops of assorted gourmet ice cream",
-      price: "$4",
-    },
-  ],
+  Breakfast: {
+    image: bread,
+    items: [
+      {
+        name: "Pancakes",
+        description: "Fluffy pancakes served with maple syrup and butter",
+        price: "$4",
+      },
+      {
+        name: "Omelette",
+        description: "Three-egg omelette with cheese, ham, and vegetables",
+        price: "$5",
+      },
+      {
+        name: "Avocado Toast",
+        description:
+          "Toasted sourdough topped with smashed avocado and chili flakes",
+        price: "$6",
+      },
+      {
+        name: "English Breakfast",
+        description:
+          "Eggs, bacon, sausages, baked beans, toast, and grilled tomato",
+        price: "$8",
+      },
+    ],
+  },
+  Starters: {
+    image: minestrone,
+    items: [
+      {
+        name: "Greek Salad",
+        description: "Feta cheese, olives, tomatoes, cucumbers & vinaigrette",
+        price: "$6",
+      },
+      {
+        name: "Tomato Soup",
+        description: "Roasted tomatoes, basil, and a dash of cream",
+        price: "$5",
+      },
+      {
+        name: "Bruschetta",
+        description:
+          "Grilled bread topped with fresh tomatoes, garlic, and basil",
+        price: "$4",
+      },
+      {
+        name: "Stuffed Mushrooms",
+        description: "Mushroom caps filled with cheese and herbs",
+        price: "$5",
+      },
+    ],
+  },
+  Mains: {
+    image: chicken,
+    items: [
+      {
+        name: "Grilled Chicken",
+        description: "Served with garlic herb butter and steamed vegetables",
+        price: "$10",
+      },
+      {
+        name: "Pasta Alfredo",
+        description: "Creamy parmesan sauce with mushrooms and grilled shrimp",
+        price: "$8",
+      },
+      {
+        name: "Beef Burger",
+        description: "Juicy beef patty with lettuce, tomato, and house sauce",
+        price: "$9",
+      },
+      {
+        name: "Fish Tacos",
+        description: "Crispy battered fish with slaw and lime crema",
+        price: "$7",
+      },
+    ],
+  },
+  Desserts: {
+    image: lava,
+    items: [
+      {
+        name: "Chocolate Lava Cake",
+        description: "Warm molten chocolate center with vanilla ice cream",
+        price: "$5",
+      },
+      {
+        name: "Tiramisu",
+        description: "Coffee-soaked ladyfingers layered with mascarpone cream",
+        price: "$6",
+      },
+      {
+        name: "Cheesecake",
+        description: "Creamy New York-style cheesecake with berry compote",
+        price: "$6",
+      },
+      {
+        name: "Ice Cream Trio",
+        description: "Three scoops of assorted gourmet ice cream",
+        price: "$4",
+      },
+    ],
+  },
 };
+  
   
 
 const SimpleMenu = () => {
@@ -101,20 +118,19 @@ const SimpleMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredMenu = Object.entries(simpleMenuItems).reduce(
-    (acc, [category, items]) => {
+    (acc, [category, data]) => {
       if (selectedCategory !== "All" && category !== selectedCategory)
         return acc;
 
-      const filteredItems = items.filter(
+      const filteredItems = data.items.filter(
         (item) =>
           item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
       if (filteredItems.length > 0) {
-        acc[category] = filteredItems;
+        acc[category] = { image: data.image, items: filteredItems };
       }
-
       return acc;
     },
     {}
@@ -155,8 +171,17 @@ const SimpleMenu = () => {
 
         {Object.keys(filteredMenu).map((category, idx) => (
           <div key={idx} className="menu-category">
-            <h2 className="category-title">{category}</h2>
-            {filteredMenu[category].map((item, i) => (
+            <div className="category-image-wrapper">
+              {filteredMenu[category].image && (
+                <img
+                  src={filteredMenu[category].image}
+                  alt={`${category} header`}
+                  className="category-header-img"
+                />
+              )}
+              <h2 className="category-title-overlay">{category}</h2>
+            </div>
+            {filteredMenu[category].items.map((item, i) => (
               <div className="simple-menu-item" key={i}>
                 <div className="item-header">
                   <span className="item-name">{item.name}</span>
