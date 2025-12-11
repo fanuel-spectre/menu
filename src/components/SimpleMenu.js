@@ -111,7 +111,6 @@ const simpleMenuItems = {
   },
 };
   
-  
 
 const SimpleMenu = () => {
   const [searchTerm, setSearchTerm] = useState("");
